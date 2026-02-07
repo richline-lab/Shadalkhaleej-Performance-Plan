@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض فني ومالي - Shadalkhaleej</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#020617',
+                            800: '#0f172a',
+                            700: '#1e293b',
+                        },
+                        brand: {
+                            blue: '#0ea5e9',
+                            cyan: '#06b6d4',
+                            gold: '#f59e0b',
+                            indigo: '#6366f1',
+                            purple: '#8b5cf6',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Setup */
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #020617; 
+            color: #e2e8f0; 
+            scroll-behavior: smooth;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 25%);
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+        /* Glassmorphism */
+        .glass-card { 
+            background: rgba(15, 23, 42, 0.4); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(15, 23, 42, 0.6); 
+            border-color: rgba(14, 165, 233, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 { letter-spacing: -0.02em; }
+        p { line-height: 1.8; }
+
+        .section-title { 
+            position: relative; 
+            display: inline-block; 
+            margin-bottom: 3.5rem;
+            font-size: 2.25rem;
+            font-weight: 800;
+        }
+        .section-title::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: -1rem; 
+            right: 0; 
+            width: 60px; 
+            height: 4px; 
+            background: linear-gradient(90deg, #0ea5e9, transparent); 
+            border-radius: 2px;
+        }
+
+        /* Animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .check-list li {
+            position: relative;
+            padding-right: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+
+        /* Watermark */
+        .watermark { position: fixed; bottom: 30px; left: 30px; z-index: 1000; opacity: 0.8; transition: all 0.4s ease; width: 60px; }
+        .watermark:hover { opacity: 1; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Watermark Link -->
+    <a href="https://richline.sa/" target="_blank" class="watermark group" title="Visit Richline Agency">
+        <img src="https://i.ibb.co/XfxF1p9p/file.jpg" alt="Richline Logo" class="rounded-xl shadow-lg border border-white/10">
+    </a>
+
+    <!-- Header -->
+    <header class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-6 overflow-hidden">
+        <!-- Background Ambience -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-brand-purple/10 blur-[120px] rounded-full -z-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-0 right-0 w-[800px] h-[500px] bg-brand-blue/10 blur-[120px] rounded-full -z-10"></div>
+        
+        <!-- Client Logo/Image -->
+        <div class="relative group mb-12">
+            <div class="absolute inset-0 bg-brand-gold/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <img src="https://i.postimg.cc/15vLqvrS/imgi-2-574289060-17845156833605154-852754470918279375-n.jpg" alt="Shadalkhaleej Logo" class="relative w-40 h-40 md:w-48 md:h-48 rounded-[2rem] shadow-2xl border border-white/10 animate-float object-cover">
+        </div>
+        
+        <!-- Title Area -->
+        <div class="space-y-6 max-w-4xl relative z-10">
+            <h1 class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-brand-gold tracking-tight leading-tight drop-shadow-sm">
+                ShadalKhaleej
+            </h1>
+            <p class="text-2xl font-light text-slate-300">استراتيجية النمو الرقمي المتكاملة</p>
+            
+            <div class="flex items-center justify-center gap-4 mt-4">
+                <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-brand-gold"></div>
+                <p class="text-brand-gold font-bold uppercase tracking-[0.3em] text-sm md:text-base">عرض فني ومالي | Performance Marketing</p>
+                <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-brand-gold"></div>
+            </div>
+        </div>
+
+        <!-- Meta Info -->
+        <div class="mt-16 flex flex-wrap justify-center gap-4 md:gap-8 text-slate-400 text-xs font-bold uppercase tracking-widest">
+            <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm">
+                <span class="text-brand-blue">🎯</span> الهدف: زيادة المبيعات
+            </span>
+            <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm">
+                <span class="text-brand-purple">🚀</span> المنصات: شاملة
+            </span>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 max-w-7xl space-y-40 pb-48">
+
+        <!-- 1. Advertising Campaigns -->
+        <section class="reveal-on-scroll">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+                <div>
+                    <span class="text-brand-gold font-bold tracking-wider text-sm block mb-2">01</span>
+                    <h2 class="section-title !mb-0 text-white">إدارة الحملات الإعلانية</h2>
+                </div>
+                <!-- Why it's important -->
+                <div class="max-w-xl bg-gradient-to-r from-brand-gold/10 to-transparent p-6 rounded-r-2xl border-r-4 border-brand-gold">
+                    <h4 class="text-brand-gold font-bold mb-2 text-sm uppercase">لماذا هذه الخدمة جوهرية؟</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        في السوق المزدحم، الوصول العشوائي هو إهدار للميزانية. تكمن قوة حملاتنا في <strong>الدقة</strong> (Precision Marketing)، حيث نستهدف العميل الجاهز للشراء مباشرة، ونلاحق المهتمين عبر إعادة الاستهداف، مما يضمن أعلى عائد استثمار (ROI) لكل ريال يتم صرفه.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Visualization: Sales Funnel / ROI -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cards for key points with explanation -->
+                    <div class="glass-card p-6 rounded-2xl hover:border-brand-gold/30 group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">📊</div>
+                        <h4 class="font-bold text-white mb-2">دراسة وتحليل المشروع + SWOT</h4>
+                        <p class="text-xs text-slate-400">لا نبدأ بالتخمين. نحلل نقاط القوة والضعف لديك ولدى المنافسين لبناء استراتيجية تخترق السوق.</p>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-2xl hover:border-brand-gold/30 group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🎯</div>
+                        <h4 class="font-bold text-white mb-2">استهداف دقيق + Lookalike</h4>
+                        <p class="text-xs text-slate-400">نستهدف جمهوراً مشابهاً لعملائك الحاليين، مما يرفع احتمالية البيع ونمو المبيعات بنسبة تصل لـ 30%.</p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover:border-brand-gold/30 group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">⚡</div>
+                        <h4 class="font-bold text-white mb-2">تحليل CRO وصفحة هبوط</h4>
+                        <p class="text-xs text-slate-400">نصمم صفحة هبوط مجانية ونحلل معدل التحويل لضمان أن الزوار يتحولون إلى عملاء فعليين.</p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover:border-brand-gold/30 group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🔄</div>
+                        <h4 class="font-bold text-white mb-2">إعادة الاستهداف (Retargeting)</h4>
+                        <p class="text-xs text-slate-400">ملاحقة العملاء الذين زاروا الموقع ولم يشتروا، لتذكيرهم واقناعهم، مما يقلل تكلفة الاستحواذ.</p>
+                    </div>
+                </div>
+
+                <!-- Fixed Graph Section -->
+                <div class="glass-card rounded-[2rem] p-8 flex flex-col justify-between bg-gradient-to-b from-navy-800 to-navy-900 border border-brand-gold/20 relative overflow-hidden h-80">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')] opacity-10"></div>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">مسار نمو المبيعات المتوقع</h4>
+                        <p class="text-xs text-brand-gold mb-6">Impact of Optimized Ads</p>
+                    </div>
+                    
+                    <div class="flex items-end justify-between h-full gap-4 relative z-10 px-2 pb-2">
+                        <!-- Month 1 -->
+                        <div class="w-full h-full flex flex-col justify-end items-center gap-2 group cursor-pointer">
+                            <div class="text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 transition-all -translate-y-2 group-hover:translate-y-0 duration-300">Launch</div>
+                            <div class="bg-slate-700/50 w-full rounded-t-lg transition-all group-hover:bg-slate-600 relative overflow-hidden" style="height: 30%;"></div>
+                            <span class="text-[10px] text-slate-500 font-bold">شهر 1</span>
+                        </div>
+                        <!-- Month 2 -->
+                        <div class="w-full h-full flex flex-col justify-end items-center gap-2 group cursor-pointer">
+                            <div class="text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 transition-all -translate-y-2 group-hover:translate-y-0 duration-300">Optimize</div>
+                            <div class="bg-brand-gold/40 w-full rounded-t-lg transition-all group-hover:bg-brand-gold/60 relative overflow-hidden" style="height: 55%;"></div>
+                            <span class="text-[10px] text-slate-500 font-bold">شهر 2</span>
+                        </div>
+                        <!-- Month 3 -->
+                        <div class="w-full h-full flex flex-col justify-end items-center gap-2 group cursor-pointer">
+                            <div class="mb-1 bg-white text-navy-900 text-[10px] font-bold px-2 py-0.5 rounded-full animate-bounce shadow-lg">
+                                +30%
+                            </div>
+                            <div class="bg-gradient-to-t from-brand-gold to-yellow-300 w-full rounded-t-lg shadow-[0_0_20px_rgba(245,158,11,0.3)] relative overflow-hidden" style="height: 85%;">
+                                <div class="absolute top-0 left-0 w-full h-full bg-white/20 animate-pulse"></div>
+                            </div>
+                            <span class="text-[10px] text-brand-gold font-bold">شهر 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Selection Options (Strategy Options) -->
+            <div class="mb-12">
+                <h3 class="text-xl font-bold text-white mb-6 pr-4 border-r-4 border-brand-gold">خيارات توزيع الميزانية (Strategy Options)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Option 1: Dual Spread -->
+                    <div class="glass-card rounded-[2rem] p-8 border border-white/5 bg-navy-800/40 relative group overflow-hidden hover:border-brand-gold/30 transition-colors">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-brand-gold/5 rounded-bl-[4rem] -mr-4 -mt-4 transition-all group-hover:bg-brand-gold/10"></div>
+                        
+                        <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                            <span class="w-2 h-8 bg-slate-600 rounded-full"></span>
+                            الخيار الأول: الانتشار المزدوج
+                        </h4>
+                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                            توزيع الميزانية الإعلانية على قناتين تسويقيتين لضمان تغطية أوسع (بحث وتصفح) للوصول للعميل في مراحل مختلفة.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/5">
+                                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                                <div>
+                                    <h5 class="font-bold text-white text-sm">Google Ads</h5>
+                                    <p class="text-[10px] text-slate-500">لجذب العميل الذي يبحث عنك (High Intent)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/5">
+                                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                <div>
+                                    <h5 class="font-bold text-white text-sm">Instagram/Snapchat</h5>
+                                    <p class="text-[10px] text-slate-500">لزيادة الوعي بالبراند (Awareness)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Focus Strategy -->
+                    <div class="glass-card rounded-[2rem] p-8 border border-brand-gold/50 bg-gradient-to-br from-navy-800/80 to-navy-900/80 relative overflow-hidden ring-1 ring-brand-gold/20">
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                            <span class="w-2 h-8 bg-brand-gold rounded-full"></span>
+                            الخيار الثاني: التركيز (Recommended)
+                        </h4>
+                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                            تركيز كامل الميزانية على منصة واحدة فقط لتحقيق أقصى اختراق ممكن للشريحة المستهدفة وتقليل التشتت، ثم التوسع لاحقاً.
+                        </p>
+                        
+                        <div class="p-4 rounded-2xl bg-brand-gold/5 border border-brand-gold/10 text-center mb-6">
+                            <p class="text-xs text-brand-gold font-bold mb-4">يتم اختيار القناة الأنسب لمجالك:</p>
+                            <div class="flex justify-center items-center gap-6">
+                                <div class="flex flex-col items-center gap-2 group/icon cursor-pointer">
+                                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover/icon:bg-brand-blue/20 group-hover/icon:border-brand-blue transition-all">
+                                        <svg class="w-6 h-6 text-white group-hover/icon:text-brand-blue transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                                    </div>
+                                    <span class="text-[10px] text-slate-300 font-bold">Google</span>
+                                </div>
+                                <div class="text-slate-600 font-black text-xs">أو</div>
+                                <div class="flex flex-col items-center gap-2 group/icon cursor-pointer">
+                                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover/icon:bg-pink-500/20 group-hover/icon:border-pink-500 transition-all">
+                                        <svg class="w-6 h-6 text-white group-hover/icon:text-pink-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    </div>
+                                    <span class="text-[10px] text-slate-300 font-bold">Instagram</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 justify-center text-center">
+                             <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                             <p class="text-[10px] text-green-400 font-bold">يوفر ما يصل إلى 20% من الميزانية المهدرة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed List -->
+            <div class="bg-navy-900/50 rounded-3xl p-8 border border-white/5">
+                <h3 class="text-xl font-bold text-white mb-6 border-b border-white/5 pb-4">تفاصيل الباقة الشاملة:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <ul class="space-y-3 text-sm text-slate-300 check-list">
+                        <li><strong>4 تصاميم إعلانية:</strong> محتوى بصري جذاب (Creative) مخصص لشد الانتباه.</li>
+                        <li><strong>كتابة محتوى إعلاني (Copywriting):</strong> نصوص تخاطب المشاعر وتقنع العقل بالشراء.</li>
+                        <li><strong>المنصات الشاملة:</strong> إطلاق على (Google, TikTok, Snapchat, Instagram, Twitter, LinkedIn) حسب الرؤية الأنسب.</li>
+                        <li><strong>تتبع التحويلات (Pixel):</strong> ربط تقني دقيق لمعرفة مصدر كل مبيعة.</li>
+                    </ul>
+                    <ul class="space-y-3 text-sm text-slate-300 check-list">
+                        <li><strong>تصميمات حصرية:</strong> هوية بصرية خاصة بـ Shadalkhaleej بعيداً عن القوالب الجاهزة.</li>
+                        <li><strong>مدير حساب شخصي:</strong> تواصل مباشر وسريع لتنفيذ التعديلات.</li>
+                        <li><strong>دعم فني 24/7:</strong> مراقبة الحملات على مدار الساعة لضمان عدم توقفها.</li>
+                        <li><strong>تقارير شهرية:</strong> لوحة بيانات توضح الأداء والنتائج بشفافية.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Social Media Management -->
+        <section class="reveal-on-scroll">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+                <div>
+                    <span class="text-brand-purple font-bold tracking-wider text-sm block mb-2">02</span>
+                    <h2 class="section-title !mb-0 text-white">إدارة حسابات التواصل الاجتماعي</h2>
+                </div>
+                <!-- Why it's important -->
+                <div class="max-w-xl bg-gradient-to-r from-brand-purple/10 to-transparent p-6 rounded-r-2xl border-r-4 border-brand-purple">
+                    <h4 class="text-brand-purple font-bold mb-2 text-sm uppercase">أهمية التواجد الدائم</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        حسابات التواصل هي "الواجهة الرقمية" لشركتك. التواجد الاحترافي والمستمر يبني <strong>الثقة</strong> (Brand Trust) لدى العملاء الجدد، ويشعرهم بأن الشركة نشطة وقائمة، مما يسهل قرار الشراء الذي قد يتعطل إذا كانت الحسابات مهملة.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Visual Card -->
+                <div class="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-purple/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-purple to-indigo-600 flex items-center justify-center text-3xl shadow-lg">📱</div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">الباقة الشهرية</h3>
+                                <p class="text-sm text-brand-purple font-bold">Content & Management</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- Feature 1 -->
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white font-bold">12</div>
+                                <div>
+                                    <h5 class="text-white font-bold text-sm mb-1">تصميم احترافي شهرياً</h5>
+                                    <p class="text-xs text-slate-400 leading-relaxed">تنوع بين بوستات تفاعلية، تثقيفية، وترويجية للحفاظ على حيوية الحساب.</p>
+                                </div>
+                            </div>
+                            <!-- Feature 2 -->
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">📝</div>
+                                <div>
+                                    <h5 class="text-white font-bold text-sm mb-1">كتابة وتجهيز المحتوى</h5>
+                                    <p class="text-xs text-slate-400 leading-relaxed">كتابة (Captions) جذابة تتناسب مع لغة الجمهور المستهدف.</p>
+                                </div>
+                            </div>
+                            <!-- Feature 3 -->
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">👀</div>
+                                <div>
+                                    <h5 class="text-white font-bold text-sm mb-1">المتابعة والرصد اليومي</h5>
+                                    <p class="text-xs text-slate-400 leading-relaxed">متابعة التعليقات والرسائل بشكل يومي لضمان سلامة الحساب (بدون خدمة الردود).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy & Engagement Graph -->
+                <div class="flex flex-col gap-6">
+                    <div class="bg-navy-800/50 border border-white/5 rounded-3xl p-8 flex-1">
+                        <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                            <span class="w-2 h-6 bg-brand-purple rounded-full"></span>
+                            استراتيجية العمل
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="bg-navy-900 rounded-xl p-4 flex items-center justify-between border border-white/5">
+                                <span class="text-sm text-slate-300">1. تخطيط المحتوى</span>
+                                <span class="text-xs bg-brand-purple/20 text-brand-purple px-2 py-1 rounded">Week 1</span>
+                            </div>
+                            <div class="bg-navy-900 rounded-xl p-4 flex items-center justify-between border border-white/5">
+                                <span class="text-sm text-slate-300">2. التصميم والإخراج</span>
+                                <span class="text-xs bg-brand-purple/20 text-brand-purple px-2 py-1 rounded">Continuous</span>
+                            </div>
+                            <div class="bg-navy-900 rounded-xl p-4 flex items-center justify-between border border-white/5">
+                                <span class="text-sm text-slate-300">3. النشر والجدولة</span>
+                                <span class="text-xs bg-brand-purple/20 text-brand-purple px-2 py-1 rounded">Optimal Times</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-brand-purple to-indigo-600 rounded-3xl p-8 text-center text-white shadow-lg shadow-brand-purple/20">
+                        <p class="text-sm font-medium opacity-90 mb-2">تقرير أداء شهري</p>
+                        <h3 class="text-2xl font-black mb-1">تحليل شامل</h3>
+                        <p class="text-xs opacity-75">يوضح التفاعل والنقاط المهمة للتحسين المستمر</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Table -->
+        <section class="reveal-on-scroll">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-white uppercase tracking-widest">عرض السعر المقترح</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-brand-gold to-brand-purple mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="glass-card rounded-[2rem] overflow-hidden max-w-4xl mx-auto border border-white/10">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right">
+                        <thead class="bg-navy-900/80 text-brand-blue uppercase text-sm font-bold">
+                            <tr>
+                                <th class="px-8 py-6 text-slate-400">الخدمة</th>
+                                <th class="px-8 py-6 text-slate-400">تفاصيل مختصرة</th>
+                                <th class="px-8 py-6 text-left text-brand-gold">التكلفة</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 text-slate-300">
+                            <!-- Ads Row -->
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="font-bold text-white text-lg mb-1">إدارة الحملات الإعلانية</div>
+                                    <span class="text-xs text-brand-gold bg-brand-gold/10 px-2 py-1 rounded border border-brand-gold/20">Focus: ROI & Sales</span>
+                                </td>
+                                <td class="px-8 py-6 text-sm">
+                                    شاملة التخطيط، 4 تصاميم، صفحة هبوط، الاستهداف، والتحسين المستمر.
+                                </td>
+                                <td class="px-8 py-6 text-left font-mono text-xl font-bold text-white group-hover:text-brand-gold transition-colors">5,700 ريال</td>
+                            </tr>
+                            
+                            <!-- Social Media Row -->
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="font-bold text-white text-lg mb-1">إدارة التواصل الاجتماعي</div>
+                                    <span class="text-xs text-brand-purple bg-brand-purple/10 px-2 py-1 rounded border border-brand-purple/20">Focus: Branding</span>
+                                </td>
+                                <td class="px-8 py-6 text-sm">
+                                    12 تصميم احترافي، كتابة المحتوى، جدولة ونشر، تقرير شهري.
+                                </td>
+                                <td class="px-8 py-6 text-left font-mono text-xl font-bold text-white group-hover:text-brand-purple transition-colors">3,900 ريال</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-navy-900 border-t-2 border-brand-blue/30">
+                            <tr>
+                                <td colspan="2" class="px-8 py-8">
+                                    <div class="flex flex-col">
+                                        <span class="text-xl font-black text-white">الإجمالي النهائي</span>
+                                        <span class="text-xs text-slate-500 mt-1">* الأسعار لا تشمل الميزانية المدفوعة للمنصات (Ad Spend)</span>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-8 text-left">
+                                    <span class="text-3xl font-black text-brand-blue font-mono drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]">9,000 ريال</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 border-t border-white/5 pt-32 pb-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80 pointer-events-none"></div>
+        
+        <div class="container mx-auto text-center space-y-16 relative z-10">
+            <div class="flex flex-col items-center gap-8">
+                <a href="https://richline.sa" target="_blank">
+                    <img src="https://i.ibb.co/XfxF1p9p/file.jpg" alt="Richline Agency" class="h-24 w-auto rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 border border-white/10 opacity-80 hover:opacity-100">
+                </a>
+                <div class="max-w-2xl">
+                    <h5 class="text-2xl font-black text-white mb-6 italic tracking-tight">Richline Strategic Agency</h5>
+                    <p class="text-slate-500 text-lg leading-relaxed">
+                        نحول الأهداف إلى أرقام، والرؤية إلى واقع.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 text-xs font-bold text-slate-600 uppercase tracking-[0.2em]">
+                <a href="tel:+966549988810" class="hover:text-brand-blue transition-colors hover:scale-110 transform duration-300">اتصل بنا</a>
+                <a href="https://wa.me/966549988810" class="hover:text-brand-blue transition-colors hover:scale-110 transform duration-300">واتساب</a>
+                <a href="mailto:contact@richline.sa" class="hover:text-brand-blue transition-colors hover:scale-110 transform duration-300">البريد الإلكتروني</a>
+            </div>
+
+            <div class="pt-12 border-t border-white/5">
+                <p class="text-[10px] text-slate-700 font-bold tracking-[0.4em] uppercase">
+                    POWERED BY <span class="text-brand-blue">RICHLINE AGENCY</span> &copy; 2026
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
